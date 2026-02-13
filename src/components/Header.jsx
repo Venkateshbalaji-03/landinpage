@@ -1,4 +1,4 @@
-function Header({ setShowMenu, cartCount }) {
+function Header({ setShowMenu, cartCount, setShowCartPage }) {
   return (
     <header className="header">
       <div className="logo">
@@ -9,8 +9,12 @@ function Header({ setShowMenu, cartCount }) {
       </div>
 
       <div className="header-right">
-        <div className="cart-wrapper">
+        <div
+          className="cart-wrapper"
+          onClick={() => setShowCartPage(true)}
+        >
           🛒
+
           {cartCount > 0 && (
             <span className="cart-count">{cartCount}</span>
           )}

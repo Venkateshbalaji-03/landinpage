@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-function Sidebar({ showMenu, setShowMenu }) {
-  const [active, setActive] = useState("Home");
+function Sidebar({ showMenu, setShowMenu, cartItems }) {
+  const [active, setActive] = useState("Products");
 
   const menu = ["Products", "Orders", "Cart"];
 
@@ -18,13 +18,30 @@ function Sidebar({ showMenu, setShowMenu }) {
         {menu.map((item) => (
           <li
             key={item}
-            className={active === item ? "active" : "inactive"}
+            className={active === item ? "active" : ""}
             onClick={() => setActive(item)}
           >
             {item}
           </li>
         ))}
       </ul>
+
+      {active === "Cart" && (
+        <div className="sidebar-cart">
+          <h4>Cart Items</h4>
+
+          {cartItems.length === 0 ? (
+            <p>No items</p>
+          ) : (
+            cartItems.map((item) => (
+              <div key={item.id} className="cart-item">
+                <img src={item.img} width="40" />
+                <p>{item.name}</p>
+              </div>
+            ))
+          )}
+        </div>
+      )}
     </aside>
   );
 }
